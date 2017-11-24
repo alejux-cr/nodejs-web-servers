@@ -1,0 +1,29 @@
+{
+  "name": "neuroscience-dictionary",
+  "version": "1.0.0",
+  "description": "Terms and definitions on neuroscience",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejuxcastle/nodejs-web-servers.git"
+  },
+  "keywords": [
+    "terms",
+    "dictionary",
+    "neuroscience"
+  ],
+  "author": "ALejux Castle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alejuxcastle/nodejs-web-servers/issues"
+  },
+  "homepage": "https://github.com/alejuxcastle/nodejs-web-servers#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
+  }
+}

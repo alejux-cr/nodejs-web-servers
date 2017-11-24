@@ -1,25 +1,30 @@
 var express = require("express");
 var cors = require("cors");
+var bodyParser = require("body-parser");
 var app = express();
 
-var skierTerms = [
+
+var neuroScienceTerms = [
     {
-        term: "Rip",
-        defined: "To move at a high rate of speed"
+        term: "axon",
+        defined:"the neuronal process that sends the signal or message away from the cell body toward target cells or neurons"
     },
     {
-        term: "Huck",
-        defined: "To throw your body off of something, usually a natural feature like a cliff"
+        term: "front cortex",
+        defined: "any part of the frontal lobe"
     },
     {
-        term: "Chowder",
-        defined: "Powder after it has been sufficiently skied"
+        term: "homeostasis",
+        defined: "self-regulating process by which a system remains stable by adjusting to changing conditions"
     }
+
 ];
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended:false }));
 
 app.use(function(req, res, next) {
-	console.log(`${req.method} request for '${req.url}'`);
+	console.log(`${req.method} request for '${req.url}' - ${JSON.stringify(req.body)}`);
 	next();
 });
 
@@ -28,7 +33,22 @@ app.use(express.static("./public"));
 app.use(cors());
 
 app.get("/dictionary-api", function(req, res) {
-	res.json(skierTerms);
+	res.json(neuroScienceTerms);
+});
+
+app.post("/dictionary-api", function(req, res){
+
+    neuroScienceTerms.push(req.body);
+    res.json(neuroScienceTerms);
+
+});
+
+app.delete("/dictionary-api/:term",function(req, res){
+
+    neuroScienceTerms= neuroScienceTerms.filter(function(definition){  /*predicate function, returns only true or false*/
+        return definition.term.toLowerCase() !== req.params.term.toLowerCase();
+    });
+    res.json(neuroScienceTerms);
 });
 
 app.listen(3000);
